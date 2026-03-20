@@ -54,42 +54,47 @@ func (t *Transformer) TransformPoint(point matrix.Matrix) matrix.Matrix {
 
 // TransformMultiPoint ...
 func (t *Transformer) TransformMultiPoint(multiPoint []matrix.Matrix) []matrix.Matrix {
+	result := make([]matrix.Matrix, len(multiPoint))
 	for i := range multiPoint {
-		multiPoint[i] = t.TransformPoint(multiPoint[i])
+		result[i] = t.TransformPoint(multiPoint[i])
 	}
-	return multiPoint
+	return result
 }
 
 // TransformLine ...
 func (t *Transformer) TransformLine(lineString matrix.LineMatrix) matrix.LineMatrix {
+	result := make(matrix.LineMatrix, len(lineString))
 	for i := range lineString {
-		lineString[i] = t.TransformPoint(lineString[i])
+		result[i] = t.TransformPoint(lineString[i])
 	}
-	return lineString
+	return result
 }
 
 // TransformPolygon ...
 func (t *Transformer) TransformPolygon(polygon matrix.PolygonMatrix) matrix.PolygonMatrix {
+	result := make(matrix.PolygonMatrix, len(polygon))
 	for i := range polygon {
-		polygon[i] = t.TransformLine(polygon[i])
+		result[i] = t.TransformLine(polygon[i])
 	}
-	return polygon
+	return result
 }
 
 // TransformMultiLineString ...
 func (t *Transformer) TransformMultiLineString(multiLineString []matrix.LineMatrix) []matrix.LineMatrix {
+	result := make([]matrix.LineMatrix, len(multiLineString))
 	for i := range multiLineString {
-		multiLineString[i] = t.TransformLine(multiLineString[i])
+		result[i] = t.TransformLine(multiLineString[i])
 	}
-	return multiLineString
+	return result
 }
 
 // TransformMultiPolygon ...
 func (t *Transformer) TransformMultiPolygon(multiPolygon []matrix.PolygonMatrix) []matrix.PolygonMatrix {
+	result := make([]matrix.PolygonMatrix, len(multiPolygon))
 	for i := range multiPolygon {
-		multiPolygon[i] = t.TransformPolygon(multiPolygon[i])
+		result[i] = t.TransformPolygon(multiPolygon[i])
 	}
-	return multiPolygon
+	return result
 }
 
 // TransformGeometry ...
