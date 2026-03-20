@@ -6,6 +6,7 @@ import (
 	"github.com/spatial-go/geoos/algorithm/matrix"
 	"github.com/spatial-go/geoos/algorithm/operation"
 	"github.com/spatial-go/geoos/coordtransform"
+	"github.com/spatial-go/geoos/utils"
 )
 
 const (
@@ -46,7 +47,8 @@ func SpheroidDistance(fromSteric, toSteric matrix.Steric) float64 {
 			lat1 := to[1] * rad
 			lng1 := to[0] * rad
 			theta := lng1 - lng0
-			dist := math.Acos(math.Sin(lat0)*math.Sin(lat1) + math.Cos(lat0)*math.Cos(lat1)*math.Cos(theta))
+			cosVal := math.Sin(lat0)*math.Sin(lat1) + math.Cos(lat0)*math.Cos(lat1)*math.Cos(theta)
+			dist := math.Acos(utils.AcosClamp(cosVal))
 			return dist * R
 		}
 	}
