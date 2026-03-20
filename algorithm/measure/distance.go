@@ -48,7 +48,7 @@ func SpheroidDistance(fromSteric, toSteric matrix.Steric) float64 {
 			lng1 := to[0] * rad
 			theta := lng1 - lng0
 			cosVal := math.Sin(lat0)*math.Sin(lat1) + math.Cos(lat0)*math.Cos(lat1)*math.Cos(theta)
-			dist := math.Acos(utils.AcosClamp(cosVal))
+			dist := math.Acos(utils.Clamp(cosVal, -1, 1))
 			return dist * R
 		}
 	}

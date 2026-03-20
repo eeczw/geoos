@@ -1,11 +1,11 @@
 package utils
 
-func AcosClamp(x float64) float64 {
-	if x > 1 {
-		return 1
+func Clamp(x, lower, upper float64) float64 {
+	if x > upper {
+		return upper
 	}
-	if x < -1 {
-		return -1
+	if x < lower {
+		return lower
 	}
 	return x
 }
